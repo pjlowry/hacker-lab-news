@@ -54,7 +54,4 @@ describe PostsController do
     it {should redirect_to posts_path}
     it {should set_the_flash[:notice]}
   end
-
-  context 'UPDATE upvote' do
-  end
 end

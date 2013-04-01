@@ -11,14 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401194811) do
+ActiveRecord::Schema.define(:version => 20130401214539) do
 
   create_table "posts", :force => true do |t|
     t.string   "source_url"
     t.string   "headline"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "points"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end

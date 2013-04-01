@@ -16,4 +16,17 @@ describe Post do
     it {should allow_mass_assignment_of :headline}
     it {should allow_mass_assignment_of :points}
   end
+
+  context 'associations' do
+    it {should have_many(:votes)}
+  end
+
+  context '#votes' do 
+    it 'should count the votes for a post' do 
+      post = FactoryGirl.create(:post)
+      Vote.create(:votable_id => post.id, :votable_type => Post)
+      post.votes.should eq 1
+
+    end
+  end
 end

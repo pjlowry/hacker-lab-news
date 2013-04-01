@@ -6,4 +6,10 @@ class Post < ActiveRecord::Base
                                       :message => "Must be a real URL" }
   validates :headline, :presence => true
 
+  has_many :votes, :as => :votable
+
+  def votes
+    Vote.where(:votable_id => self.id)
+  end
+
 end

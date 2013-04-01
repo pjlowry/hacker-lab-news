@@ -23,4 +23,5 @@ class PostsController < ApplicationController
     flash[:notice] = "The post was successfully deleted."
     redirect_to posts_path
   end
+
 end
