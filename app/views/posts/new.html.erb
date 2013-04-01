@@ -1,10 +1,12 @@
 <% provide :title, "New Post" %>
 
-<h1><%= yield :title %></h1>
+<h3><%= yield :title %></h3>
 <form action="/posts" method="post">
-  <label>Source URL</label>
+  <label><b>Source URL</b></label>
   <input name="post[source_url]" />
-  <label>Headline</label>
+  </br></br>
+  <label><b>Headline</b></label>
   <input name="post[headline]" />
-  <input name="commit" type="submit" value="Post" />
+  </br></br>
+  <input name="commit" type="submit" value="Post" class="btn btn-primary"/>
 </form>

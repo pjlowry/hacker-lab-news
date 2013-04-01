@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :post do
-    source_url 'www.google.com'
+    sequence(:source_url) {|n| "http://www#{n}.google.com"}
     headline 'GOOGLE'
   end
 end

@@ -1,19 +1,22 @@
 <h1>Hacker Lab News</h1>
 
-<h2>A user-contributed Posting site.</h2>
+<h4>A user-contributed Posting site</h4>
 
-<table>
+<table class="table">
   <tr>
-    <td>Headline</td>
-    <td>Source URL</td>
+    <td><b>Headline</b></td>
+    <td><b>Posted At</b></td>
+    <td></td>
+    <td></td>
   </tr>
   <% @posts.each do |post| %>
     <tr>
-      <td><%= post.headline %></td>
-      <td><%= post.source_url %></td>
-      <td><%= link_to 'Delete', post, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+      <td><%= link_to "#{post.headline}", post.source_url %></td>
+      <td><%= post.created_at.localtime.strftime("%x %I:%M %p") %></td>
+      <td><%= link_to 'Up Vote', post, :class => 'btn btn-primary' %></td>
+      <td><%= link_to 'Delete', post, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-primary' %></td>
     </tr>
   <% end %>
 </table>
 
-<p><%= link_to 'Add Post', new_post_path %></p>
+<p><%= link_to 'Add Post', new_post_path, :class => 'btn btn-primary' %></p>

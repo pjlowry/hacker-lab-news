@@ -7,14 +7,14 @@ class PostsController < ApplicationController
 
     if post.save
       flash[:notice] = "Your post was successful!"
-      redirect_to new_post_path
+      redirect_to posts_path
     else
       render :new
     end
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.order("created_at DESC")
   end
 
   def destroy
