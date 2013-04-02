@@ -12,9 +12,7 @@
 <%= form_for @comment do |f| %>
   <%= f.label :text %>
   <%= f.text_field :text %>
-  <%= f.label :commentable_id %>
-  <%= f.text_field :commentable_id %>
-  <%= f.label :commentable_type %>
-  <%= f.text_field :commentable_type %>
+  <%= f.hidden_field :commentable_id %>
+  <%= f.hidden_field :commentable_type %>
   <%= f.submit :class => 'btn btn-primary' %>
 <% end %>

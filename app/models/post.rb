@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  include Popularity
+  
   attr_accessible :source_url, :headline, :points
 
   validates :source_url, :presence => true,
@@ -8,13 +10,5 @@ class Post < ActiveRecord::Base
 
   has_many :votes, :as => :votable
   has_many :comments, :as => :commentable
-
-  def points
-    Vote.where(:votable_id => self.id).length
-  end
-
-  def rank
-    @rank = self.points/(((Time.now.gmtime - self.created_at)/60)**2)
-  end
 
 end

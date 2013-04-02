@@ -1,8 +1,16 @@
 HackerLabNewsWeb::Application.routes.draw do
 
+  get 'login', to: 'sessions#new', as: 'login'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
+
+  resources :sessions
+  resources :users
+  get 'signup', to: 'users#new', as: 'signup'
+
+  root to: 'posts#index'
   resources :posts, :except => [:show, :update, :edit]
   resources :votes, :except => [:show, :update, :edit, :delete, :new]
-  resources :comments
+  resources :comments, :except => [:show, :update, :edit, :delete]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

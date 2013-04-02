@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  include Popularity
+  
   attr_accessible :text, :commentable_id, :commentable_type
   validates :text, :presence => true
   belongs_to :commentable

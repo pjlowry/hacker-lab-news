@@ -1,0 +1,14 @@
+<%= flash[:notice] %>
+<%= flash[:alert] %>
+
+<% provide :title, "Log In" %>
+
+<h3><%= yield :title %></h3>
+
+<%= form_tag sessions_path do %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+  <%= submit_tag "Submit", :class => 'btn btn-primary' %>
+<% end %>

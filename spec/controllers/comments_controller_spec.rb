@@ -4,6 +4,7 @@ describe CommentsController do
   context 'routing' do
     it {should route(:get, '/comments/new').to :action => :new}
     it {should route(:post, '/comments').to :action => :create}
+    it {should route(:get, '/comments').to :action => :index}
   end
 
   context 'GET new' do 
@@ -34,5 +35,11 @@ describe CommentsController do
 
       it {should render_template :new}
     end
+  end
+
+  context 'GET index' do
+    before {get :index}
+
+    it {should render_template :index}
   end
 end

@@ -1,0 +1,26 @@
+<h1>Hacker Lab News</h1>
+
+<h4>Comments</h4>
+
+<table class="table">
+  <tr>
+    <td><b>Comment</b></td>
+    <td><b>Posted At</b></td>
+    <td><b>Votes</b></td>
+    <td><b>Comments</b></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <% Comment.all.each do |comment| %>
+    <tr>
+      <td><%= comment.text %></td>
+      <td><%= comment.created_at.localtime.strftime("%x %I:%M %p") %></td>
+      <td><%= comment.votes.count %></td>
+      <td><%= comment.comments.count %></td>
+      <td><%= link_to 'Up Vote', votes_path({:vote => {:votable_id => comment.id, :votable_type => comment.class}}), :method => :post, :class => 'btn btn-primary' %></td>
+      <td><%= link_to 'Comment', new_comment_path({:comment => {:commentable_id => comment.id, :commentable_type => comment.class}}), :method => :get, :class => 'btn btn-primary' %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to 'Add Comment', new_comment_path, :class => 'btn btn-primary' %></p>

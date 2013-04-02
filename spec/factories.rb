@@ -11,4 +11,11 @@ FactoryGirl.define do
   factory :vote do
     association :votable, :factory => :post
   end
+
+  factory :user do 
+    sequence(:email) { |n| "abc#{n}@gmail.com" }
+    screen_name 'abcdefg'
+    password 'abc1234'
+    password_confirmation 'abc1234'
+  end
 end
