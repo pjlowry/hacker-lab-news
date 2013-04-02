@@ -4,6 +4,7 @@
 
 <table class="table">
   <tr>
+    <td><b>Story ID</b></td>
     <td><b>Comment</b></td>
     <td><b>Posted At</b></td>
     <td><b>Votes</b></td>
@@ -13,6 +14,7 @@
   </tr>
   <% Comment.all.each do |comment| %>
     <tr>
+      <td><%= comment.commentable_id %></td>
       <td><%= comment.text %></td>
       <td><%= comment.created_at.localtime.strftime("%x %I:%M %p") %></td>
       <td><%= comment.votes.count %></td>

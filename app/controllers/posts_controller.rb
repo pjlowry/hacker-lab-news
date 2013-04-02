@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :authorize, only: [:new, :create, :destroy]
+  # before_filter :authorize, only: [:new, :create, :destroy]
 
   def new
     @post = Post.new
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.sort {|a,b| a.rank <=> b.rank}.reverse
+    @posts = Post.ranked
   end
 
   def destroy

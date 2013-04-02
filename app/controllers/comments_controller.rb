@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :authorize, only: [:new, :create]
+  # before_filter :authorize, only: [:new, :create]
 
   def new
     @comment = Comment.new(params[:comment])
@@ -17,6 +17,7 @@ class CommentsController < ApplicationController
   end
 
   def index
-    @comments = Comment.all.sort {|a,b| a.rank <=> b.rank}.reverse
+    @commentable = Post.find(params[:commentable_id])
+    @comments = @commentable.comments
   end
 end

@@ -38,8 +38,9 @@ describe CommentsController do
   end
 
   context 'GET index' do
-    before {get :index}
-
+    let(:post) {FactoryGirl.create(:post)}
+    let(:params) {{:commentable_id => post.id}}
+    before {get :index, params}
     it {should render_template :index}
   end
 end

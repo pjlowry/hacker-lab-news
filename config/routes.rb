@@ -11,6 +11,7 @@ HackerLabNewsWeb::Application.routes.draw do
   resources :posts, :except => [:show, :update, :edit]
   resources :votes, :except => [:show, :update, :edit, :delete, :new]
   resources :comments, :except => [:show, :update, :edit, :delete]
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

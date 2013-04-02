@@ -6,4 +6,8 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable
   has_many :votes, :as => :votable
   has_many :comments, :as => :commentable
+
+  def self.ranked
+    self.all.sort {|a,b| a.rank <=> b.rank}.reverse
+  end
 end
