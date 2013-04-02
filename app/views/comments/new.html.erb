@@ -4,9 +4,18 @@
 <% provide :title, "New Comment" %>
 
 <h3><%= yield :title %></h3>
-<form action="/comments" method="post">
-  <label><b>Message</b></label>
-  <input name="comment[text]" />
-  </br></br>
-  <input name="commit" type="submit" value="Post" class="btn btn-primary"/>
-</form>
+
+<% if @comment.errors.any? %>
+  <h3>Please correct these problems:</h3>
+  <ul>
+    <% @comment.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @comment do |f| %>
+  <%= f.label :message %>
+  <%= f.text_field :text %>
+  <%= f.submit %>
+<% end %>

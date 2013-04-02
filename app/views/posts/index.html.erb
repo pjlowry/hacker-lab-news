@@ -19,7 +19,7 @@
       <td><%= post.votes.count %></td>
       <td><%= post.comments.count %></td>
       <td><%= link_to 'Up Vote', votes_path({:vote => {:votable_id => post.id, :votable_type => post.class}}), :method => :post, :class => 'btn btn-primary' %></td>
-      <td><%= link_to 'Comment', comments_path({:comment => {:commentable_id => post.id, :commentable_type => post.class}}), :method => :post, :class => 'btn btn-primary' %></td>
+      <td><%= link_to 'Comment', new_comment_path({:comment => {:commentable_id => post.id, :commentable_type => post.class}}), :method => :get, :class => 'btn btn-primary' %></td>
       <td><%= link_to 'Delete', post, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-primary' %></td>
     </tr>
   <% end %>
