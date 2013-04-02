@@ -1,0 +1,18 @@
+<% if @post.errors.any? %>
+  <div class="alert alert-error">
+    <h3>Please correct these problems:</h3>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @post do |f| %>
+  <%= f.label :headline %>
+  <%= f.text_field :headline %>
+  <%= f.label :source_url %>
+  <%= f.text_field :source_url %>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>

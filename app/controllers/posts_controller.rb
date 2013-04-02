@@ -1,11 +1,12 @@
 class PostsController < ApplicationController
   def new
+    @post = Post.new
   end
 
   def create
-    post = Post.new(params[:post])
+    @post = Post.new(params[:post])
 
-    if post.save
+    if @post.save
       flash[:notice] = "Your post was successful!"
       redirect_to posts_path
     else
@@ -14,7 +15,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.order("created_at DESC")
+    # @posts = Post.order("created_at DESC")
+    @posts = Post.all.sort {|a,b| a.rank <=> b.rank}.reverse
   end
 
   def destroy

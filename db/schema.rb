@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20130401235742) do
     t.string   "headline"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "points"
   end
 
   create_table "votes", :force => true do |t|

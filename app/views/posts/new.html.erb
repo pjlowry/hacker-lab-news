@@ -1,12 +1,8 @@
+<%= flash[:notice] %>
+<%= flash[:alert] %>
+
 <% provide :title, "New Post" %>
 
 <h3><%= yield :title %></h3>
-<form action="/posts" method="post">
-  <label><b>Source URL</b></label>
-  <input name="post[source_url]" />
-  </br></br>
-  <label><b>Headline</b></label>
-  <input name="post[headline]" />
-  </br></br>
-  <input name="commit" type="submit" value="Post" class="btn btn-primary"/>
-</form>
+
+<%= render 'form' %>

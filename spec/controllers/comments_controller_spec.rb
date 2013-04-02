@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe CommentsController do 
   context 'routing' do
+    it {should route(:get, '/comments/new').to :action => :new}
     it {should route(:post, '/comments').to :action => :create}
   end
 

@@ -13,4 +13,8 @@ class Post < ActiveRecord::Base
     Vote.where(:votable_id => self.id).length
   end
 
+  def rank
+    @rank = self.points/(((Time.now.gmtime - self.created_at)/60)**2)
+  end
+
 end
