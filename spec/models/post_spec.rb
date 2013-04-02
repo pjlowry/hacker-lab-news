@@ -19,13 +19,14 @@ describe Post do
 
   context 'associations' do
     it {should have_many(:votes)}
+    it {should have_many(:comments)}
   end
 
-  context '#votes' do 
+  context '#points' do 
     it 'should count the votes for a post' do 
       post = FactoryGirl.create(:post)
       Vote.create(:votable_id => post.id, :votable_type => Post)
-      post.votes.should eq 1
+      post.points.should eq 1
 
     end
   end

@@ -7,9 +7,10 @@ class Post < ActiveRecord::Base
   validates :headline, :presence => true
 
   has_many :votes, :as => :votable
+  has_many :comments, :as => :commentable
 
-  def votes
-    Vote.where(:votable_id => self.id)
+  def points
+    Vote.where(:votable_id => self.id).length
   end
 
 end

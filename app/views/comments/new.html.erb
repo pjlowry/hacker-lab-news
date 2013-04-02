@@ -1,0 +1,12 @@
+<%= flash[:notice] %>
+<%= flash[:alert] %>
+
+<% provide :title, "New Comment" %>
+
+<h3><%= yield :title %></h3>
+<form action="/comments" method="post">
+  <label><b>Message</b></label>
+  <input name="comment[text]" />
+  </br></br>
+  <input name="commit" type="submit" value="Post" class="btn btn-primary"/>
+</form>

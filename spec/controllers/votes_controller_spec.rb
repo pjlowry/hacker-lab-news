@@ -10,19 +10,4 @@ describe VotesController do
       expect {post :create}.to change(Vote, :count).by(1) 
     end
   end
-
-  context 'GET index' do
-
-    context 'with parameters' do
-      let(:valid_attributes) {{:votable_id => 1, :votable_type => Post}}
-      let(:valid_parameters) {{:vote => valid_attributes}}
-
-      it 'returns all votes with given votable_id' 
-        # expect {get :index, valid_attributes}.to return(1)
-        # Vote = double
-        # Vote.should_receive(:all)
-      
-
-    end
-  end
 end 

@@ -7,6 +7,8 @@
     <td><b>Headline</b></td>
     <td><b>Posted At</b></td>
     <td><b>Votes</b></td>
+    <td><b>Comments</b></td>
+    <td></td>
     <td></td>
     <td></td>
   </tr>
@@ -14,8 +16,10 @@
     <tr>
       <td><%= link_to "#{post.headline}", post.source_url %></td>
       <td><%= post.created_at.localtime.strftime("%x %I:%M %p") %></td>
-      <td><%= post.votes.length %></td>
+      <td><%= post.votes.count %></td>
+      <td><%= post.comments.count %></td>
       <td><%= link_to 'Up Vote', votes_path({:vote => {:votable_id => post.id, :votable_type => post.class}}), :method => :post, :class => 'btn btn-primary' %></td>
+      <td><%= link_to 'Comment', comments_path({:comment => {:commentable_id => post.id, :commentable_type => post.class}}), :method => :post, :class => 'btn btn-primary' %></td>
       <td><%= link_to 'Delete', post, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-primary' %></td>
     </tr>
   <% end %>
