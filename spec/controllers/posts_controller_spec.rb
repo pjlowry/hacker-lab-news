@@ -6,33 +6,53 @@ describe PostsController do
     it {should route(:post, '/posts').to :action => :create}
   end
 
-  context 'GET new' do 
-    before {get :new}
+  context 'GET new' do
+    let(:user) {FactoryGirl.create(:user)}
 
-    it {should render_template :new}
-  end
-
-  context 'POST create' do 
-    context 'with valid parameters' do
-      let(:valid_attributes) {{:source_url => "http://www.learnhowtoprogram.com/lessons/hacker-news-clone", :headline => "Hacker News Clone"}}
-      let(:valid_parameters) {{:post => valid_attributes}}
-
-      it 'creates a new post' do
-        expect {post :create, valid_parameters}.to change(Post, :count).by(1) 
-      end
-
-      before {post :create, valid_parameters}
-      it {should redirect_to posts_path}
-      it {should set_the_flash[:notice]}
+    context 'in authorized session' do
+        
+      before {get :new, {}, {'user_id' => user.id}}
+      it {should render_template :new}
     end
 
-    context 'with invalid parameters' do
-      let(:invalid_attributes) {{:source_url => "", :headline => ""}}
-      let(:invalid_parameters) {{:post => invalid_attributes}}
+    context 'not authorized session' do
+      
+      before {get :new, {}, {}}
+      it {should redirect_to login_url}
+    end
+  end
 
-      before {post :create, invalid_parameters}
+  context 'POST create' do
+    let(:valid_attributes) {{:source_url => "http://www.learnhowtoprogram.com/lessons/hacker-news-clone", :headline => "Hacker News Clone"}}
+    let(:valid_parameters) {{:post => valid_attributes}}
 
-      it {should render_template :new}
+    context 'in authorized session' do
+      let(:user) {FactoryGirl.create(:user)}
+
+      context 'with valid_parameters' do
+          
+        before {post :create, valid_parameters, {'user_id' => user.id}}
+
+        it 'creates a post' do
+          expect {post :create, valid_parameters, {'user_id' => user.id}}.to change(Post, :count).by(1)
+        end
+
+        it {should redirect_to posts_path}
+        it {should set_the_flash[:notice]}
+      end
+
+      context 'with invalid_parameters' do 
+        let(:invalid_attributes) {{:source_url => "", :headline => ""}}
+        let(:invalid_parameters) {{:post => invalid_attributes}} 
+        before {post :create, invalid_parameters, {'user_id' => user.id}}
+
+        it {should render_template :new}  
+      end
+    end
+
+    context 'not authorized session' do  
+      before {post :create, valid_parameters, {}}
+      it {should redirect_to login_url}
     end
   end
 
@@ -43,15 +63,27 @@ describe PostsController do
   end
 
   context 'DELETE destroy' do 
-    it 'destroys a post' do 
-      post = FactoryGirl.create :post
-      expect {delete :destroy, {:id => post.id}}.to change(Post, :count).by(-1)
-    end
-    
-    let(:post) {FactoryGirl.create :post}
-    before {delete :destroy, {:id => post.id}}
+    context 'in authorized session' do 
+      let(:user) {FactoryGirl.create(:user)}
+      let(:post) {FactoryGirl.create(:post)}
 
-    it {should redirect_to posts_path}
-    it {should set_the_flash[:notice]}
+        
+      before {delete :destroy, {:id => post.id}, {'user_id' => user.id}}
+
+      it 'destroys a post' do
+        post = FactoryGirl.create(:post)
+        expect {delete :destroy, {:id => post.id}}.to change(Post, :count).by(-1)
+      end
+
+      it {should redirect_to posts_path}
+      it {should set_the_flash[:notice]}
+    end
+
+    context 'not authorized session' do 
+      let(:post) {FactoryGirl.create(:post)}
+      
+      before {delete :destroy, {:id => post.id}, {}}
+      it {should redirect_to login_url}
+    end
   end
 end

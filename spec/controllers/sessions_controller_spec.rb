@@ -12,23 +12,17 @@ describe SessionsController do
   context "POST create" do
 
     context 'with valid parameters' do
-      # binding.pry
-      let(:valid_parameters) {{:email => 'abc1@gmail.com', :password => 'abc1234'}}
-      # let(:user) {FactoryGirl.create(:user)}
       it 'should set the session to the user id' do 
         user = FactoryGirl.create(:user)
-        post :create, valid_parameters
+        post :create, {:email => user.email, :password => user.password}
         should set_session(:user_id).to(user.id)
       end
-      # before {post :create, valid_parameters}
-      # it {should set_session(:user_id).to(278)}
     end
 
     context 'with invalid parameters' do
-      let(:invalid_parameters) {{:email => 'abc1@gmail.com', :password => 'xyz5678'}}
       let(:user) {FactoryGirl.create(:user)}
 
-      before {post :create, invalid_parameters}
+      before {post :create, {:email => user.email, :password => '1sze'}}
       it {should_not set_session(:user_id)}
     end
   end

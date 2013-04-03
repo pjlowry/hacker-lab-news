@@ -7,10 +7,18 @@ describe CommentsController do
     it {should route(:get, '/comments').to :action => :index}
   end
 
-  context 'GET new' do 
-    before {get :new}
+  context 'GET new' do
+    let(:user) {FactoryGirl.create(:user)}
 
-    it {should render_template :new}
+    context 'authorized session' do
+      before {get :new, {}, {'user_id' => user.id}}
+      it {should render_template :new}
+    end
+    
+    context 'not authorized session' do
+      before {get :new, {}, {}}
+      it {should redirect_to login_url}
+    end
   end
 
   context 'POST create' do 

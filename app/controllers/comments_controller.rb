@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  # before_filter :authorize, only: [:new, :create]
+  before_filter :authorize, only: [:new]
 
   def new
     @comment = Comment.new(params[:comment])
