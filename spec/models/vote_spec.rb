@@ -9,4 +9,8 @@ describe Vote do
     it {should allow_mass_assignment_of :votable_id}
     it {should allow_mass_assignment_of :votable_type}
   end
+
+  context 'validations' do 
+    it {should validate_presence_of :votable_id}
+  end
 end

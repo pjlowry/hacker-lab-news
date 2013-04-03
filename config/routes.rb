@@ -8,10 +8,16 @@ HackerLabNewsWeb::Application.routes.draw do
   get 'signup', to: 'users#new', as: 'signup'
 
   root to: 'posts#index'
-  resources :posts, :except => [:show, :update, :edit]
-  resources :votes, :except => [:show, :update, :edit, :delete, :new]
-  resources :comments, :except => [:show, :update, :edit, :delete]
   
+  resources :posts, :except => [:show, :update, :edit] do
+    resources :votes, :except => [:show, :update, :edit, :delete, :new]
+  end
+  
+  # resources :votes, :except => [:show, :update, :edit, :delete, :new]
+  
+  resources :comments, :except => [:show, :update, :edit, :delete]
+  #   resources :comments, :except => [:show, :update, :edit, :delete]
+  # end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

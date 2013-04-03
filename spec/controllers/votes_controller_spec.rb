@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe VotesController do 
   context 'routing' do
-    it {should route(:post, '/votes').to :action => :create}
+    it {should route(:post, '/posts/1/votes').to :action => :create, :post_id => '1' }
   end
 
   context 'POST create' do
@@ -11,7 +11,7 @@ describe VotesController do
       it 'creates a new vote' do
 
         user = FactoryGirl.create(:user)
-        expect {post :create, {:votable_id => new_post.id}, {'user_id' => user.id}}.to change(Vote, :count).by(1)
+        expect {post :create, {:post_id => new_post.id}, {'user_id' => user.id}}.to change(Vote, :count).by(1)
       end
     end
 
